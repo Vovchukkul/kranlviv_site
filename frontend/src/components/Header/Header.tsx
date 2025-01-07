@@ -1,7 +1,12 @@
 import logo from "../../images/logo.png"
 import "./Header.scss"
 
-export const Header = () => {
+type Props = {
+    click: () => void,
+    isActive: boolean,
+}
+
+export const Header: React.FC<Props> = ({ click, isActive }) => {
     return (
         <div className="header container">
             <a href="/">    
@@ -26,7 +31,10 @@ export const Header = () => {
                 </a>
             </ul>
 
-            <div className="burger-menu">
+            <div
+                className={`burger-menu ${isActive ? "active" : ""}`}
+                onClick={click}
+            >
                 <span></span>
                 <span></span>
                 <span></span>

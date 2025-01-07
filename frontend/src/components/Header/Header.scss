@@ -1,4 +1,4 @@
-@import "../../utils/mixins.scss";
+@import '../../utils/mixins.scss';
 
 .container {
     padding-inline: 30px;
@@ -33,7 +33,6 @@
             }
         }
     }
-
     .burger-menu {
         width: 40px;
         height: 25px;
@@ -41,26 +40,58 @@
         flex-direction: column;
         justify-content: space-between;
         cursor: pointer;
-
-        @include onTablet {
-            width: 50px;
-            height: 35px;
-        }
-
-        @include onDesktop {
-            display: none;
-        }
-      }
+        position: relative; // For absolute positioning of spans
+        z-index: 10;
       
-      .burger-menu span {
-        display: block;
-        height: 4px;
-        background-color: #333;
-        border-radius: 2px;
-        transition: all 0.3s ease-in-out;
-
         @include onTablet {
-            height: 5px;
+          width: 50px;
+          height: 35px;
         }
-      }
+      
+        @include onDesktop {
+          display: none;
+        }
+      
+        span {
+          display: block;
+          height: 4px;
+          width: 100%;
+          background-color: #333;
+          border-radius: 2px;
+          transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+          position: absolute;
+        }
+      
+        // Line 1: Slides down and rotates
+        &.active span:nth-child(1) {
+          transform: translateY(10px) rotate(45deg);
+          background-color: #000; // Optional: Change color for effect
+        }
+      
+        // Line 2: Splits and disappears
+        &.active span:nth-child(2) {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+      
+        // Line 3: Slides up and rotates
+        &.active span:nth-child(3) {
+          transform: translateY(-10px) rotate(-45deg);
+          background-color: #000; // Optional: Change color for effect
+        }
+      
+        // Default positioning for spans
+        span:nth-child(1) {
+          top: 0;
+        }
+      
+        span:nth-child(2) {
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      
+        span:nth-child(3) {
+          bottom: 0;
+        }
+      }      
 }
