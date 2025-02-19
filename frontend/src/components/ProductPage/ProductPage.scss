@@ -1,0 +1,124 @@
+
+/* ProductPage.css */
+.product_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  .product_slider {
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 30px;
+  }
+  
+  .product_image img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .product_info {
+    text-align: center;
+    max-width: 600px;
+  }
+  
+  .product_title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .product_description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .product_specs {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .product_specs li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .buy_button {
+    background: #ffcc00;
+    color: #1f1f1f;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .buy_button:hover {
+    background: #e6b800;
+  }
+  
+  /* Related Products */
+  .related_products {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  .related_products h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .related_item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .related_item img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .related_item h3 {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .related_item p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .product_slider {
+      width: 90%;
+    }
+    .related_products {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product_info {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+    .product_title {
+      font-size: 24px;
+    }
+    .related_products h2 {
+      font-size: 22px;
+    }
+  }

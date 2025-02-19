@@ -40,6 +40,7 @@ function App() {
         <Contact />
 
         <Footer />
+        {/* <ProductPage /> */}
       </div>
     );
   }

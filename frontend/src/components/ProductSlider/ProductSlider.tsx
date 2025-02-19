@@ -48,7 +48,7 @@ export const ProductSlider: React.FC<Props> = ({ products }) => {
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <p>{product.price}</p>
-              <a href="/catalog" className="buy-button">Купити</a>
+              <a href="/product" className="buy-button">Купити</a>
             </div>
           ))}
         </Slider>
