@@ -1,5 +1,65 @@
 @import "../../utils/mixins.scss";
 
-.container {
-    padding-inline: 30px;
+.aside {
+    background-color: #2d2d2d;
+    color: white;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+  }
+  
+  .aside ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .aside ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .aside ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .aside ul li a:hover {
+    color: #c0c0c0;
+  }
+  
+  .aside a {
+    color: #c0c0c0;
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .aside a:hover {
+    color: white;
+  }
+
+
+.slide-in {
+  transform: translateX(-100%);
+  animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

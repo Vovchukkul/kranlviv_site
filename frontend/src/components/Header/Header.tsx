@@ -4,41 +4,28 @@ import "./Header.scss"
 type Props = {
     click: () => void,
     isActive: boolean,
-}
+};
 
 export const Header: React.FC<Props> = ({ click, isActive }) => {
     return (
-        <div className="header container">
-            <a href="/">    
-                <img className="header_logo" src={logo} alt="logo" />
+        <header className="header container bg-gray-900 text-white flex justify-between items-center p-4 shadow-lg">
+            <a href="/">
+                <img className="header_logo h-12" src={logo} alt="logo" />
             </a>
+            
+            <nav className="hidden md:flex gap-6">
+                <a href="/" className="hover:text-gray-400">Головна</a>
+                <a href="/catalog" className="hover:text-gray-400">Каталог</a>
+                <a href="/about" className="hover:text-gray-400">Про нас</a>
+                <a href="/contact" className="hover:text-gray-400">Контакти</a>
+                <a href="/delivery" className="hover:text-gray-400">Доставка і оплата</a>
+            </nav>
 
-            <ul>
-                <a href="">
-                    <li>Головна</li>
-                </a>
-                <a href="">
-                    <li>Каталог</li>
-                </a>
-                <a href="">
-                    <li>Про нас</li>
-                </a>
-                <a href="">
-                    <li>Контакти</li>
-                </a>
-                <a href="">
-                    <li>Доставка і оплата</li>
-                </a>
-            </ul>
-
-            <div
-                className={`burger-menu ${isActive ? "active" : ""}`}
-                onClick={click}
-            >
-                <span></span>
-                <span></span>
-                <span></span>
+            <div className="md:hidden burger-menu" onClick={click}>
+                <span className={`block w-8 h-1 bg-white mb-1 transition ${isActive ? 'rotate-45 translate-y-2' : ''}`}></span>
+                <span className={`block w-8 h-1 bg-white mb-1 transition ${isActive ? 'opacity-0' : ''}`}></span>
+                <span className={`block w-8 h-1 bg-white transition ${isActive ? '-rotate-45 -translate-y-2' : ''}`}></span>
             </div>
-        </div>
-    )
-}
+        </header>
+    );
+};
