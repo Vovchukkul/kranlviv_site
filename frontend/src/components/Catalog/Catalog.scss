@@ -1,0 +1,99 @@
+/* CatalogPage.css */
+.catalog_page {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .catalog_controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .search_input {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .filter_dropdown {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .product_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .product_card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .product_card img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .product_card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .product_card p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .buy_button {
+    background: #ffcc00;
+    color: #1f1f1f;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .buy_button:hover {
+    background: #e6b800;
+  }
+  
+  .load_more {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .load_more:hover {
+    background: #0056b3;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .catalog_controls {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  

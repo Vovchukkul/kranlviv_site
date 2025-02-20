@@ -1,5 +1,6 @@
 import logo from "../../images/logo.png"
 import "./Header.scss"
+import { Link } from "react-scroll" 
 
 type Props = {
     click: () => void,
@@ -16,8 +17,10 @@ export const Header: React.FC<Props> = ({ click, isActive }) => {
             <nav className="hidden md:flex gap-6">
                 <a href="/" className="hover:text-gray-400">Головна</a>
                 <a href="/catalog" className="hover:text-gray-400">Каталог</a>
-                <a href="/about" className="hover:text-gray-400">Про нас</a>
-                <a href="/contact" className="hover:text-gray-400">Контакти</a>
+                {/* <a href="/about" className="hover:text-gray-400">Про нас</a> */}
+                <Link to="about" className="hover:text-gray-400" smooth={true} duration={500}>Про нас</Link>
+                {/* <a href="/contact" className="hover:text-gray-400">Контакти</a> */}
+                <Link to="contact" className="hover:text-gray-400" smooth={true} duration={500}>Контакти</Link>
                 <a href="/delivery" className="hover:text-gray-400">Доставка і оплата</a>
             </nav>
 

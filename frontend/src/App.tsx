@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import './App.css';
 
-import { Header } from './components/Header/Header';
-import { Aside } from './components/Aside/Aside';
 import { ProductSlider } from './components/ProductSlider/ProductSlider';
 import { Contact } from './components/Contact/Contact';
 import { Footer } from './components/Footer/Footer';
@@ -17,17 +15,8 @@ const products = [
   ];
 
 function App() {
-    const [isActive, setIsActive] = useState(false);
-  
-    const toggleBurger = () => {
-        setIsActive(!isActive);
-    };
-  
     return (
       <div className='app'>
-        <Header click={toggleBurger} isActive={isActive} />
-        {isActive && <Aside />}
-        
         <Hero />
         
         <section className="product-slider-section">
@@ -38,9 +27,6 @@ function App() {
         <About />
 
         <Contact />
-
-        <Footer />
-        {/* <ProductPage /> */}
       </div>
     );
   }
