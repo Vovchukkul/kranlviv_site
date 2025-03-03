@@ -11,7 +11,7 @@ import axios from 'axios';
 import { CallButton } from './components/CallButton.tsx/CallButton';
 import { CartPage } from './components/CartPage/CartPage';
 // export const API_URL = "http://localhost:5000/api";
-export const API_URL = "https://kranlviv_site.railway.internal/api";
+export const API_URL = "https://kranlvivsite-production.up.railway.app/";
 
 
 export const Root = () => {
