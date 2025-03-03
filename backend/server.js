@@ -5,13 +5,11 @@ const mongoose = require("mongoose");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/kranlviv";
+const MONGO_URI = process.env.MONGO_URI;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Підключення до MongoDB
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,13 +19,15 @@ mongoose.connect(MONGO_URI, {
 
 // Модель товарів
 const Product = mongoose.model("Product", new mongoose.Schema({
+  id: Number,
   name: String,
   category: String,
   price: Number,
-  image: String
+  images: [String],
+  description: String
 }));
 
-// 📌 **Маршрут для отримання товарів**
+// Отримання всіх товарів
 app.get("/api/products", async (req, res) => {
   try {
     const products = await Product.find();

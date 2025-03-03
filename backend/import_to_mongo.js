@@ -1,32 +1,41 @@
 require("dotenv").config();
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 const fs = require("fs");
 
-const products = JSON.parse(fs.readFileSync("prom_products.json", "utf8"));
+const MONGO_URI = process.env.MONGO_URI;
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017";
-const DB_NAME = "kranlviv";
-const COLLECTION_NAME = "products";
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("✅ Підключено до MongoDB"))
+  .catch(err => console.error("❌ Помилка MongoDB:", err));
 
-async function importProducts() {
+const Product = mongoose.model("Product", new mongoose.Schema({
+  id: Number,
+  name: String,
+  category: String,
+  price: Number,
+  images: [String],
+  description: String
+}));
+
+const products = JSON.parse(fs.readFileSync("prom_products.json", "utf-8"));
+
+const importData = async () => {
   try {
-    const client = new MongoClient(MONGO_URI);
-    await client.connect();
-    console.log("✅ Підключено до MongoDB");
+    // Видаляємо старі товари перед імпортом (якщо треба)
+    await Product.deleteMany();
+    console.log("🗑 Видалено старі товари...");
 
-    const db = client.db(DB_NAME);
-    const collection = db.collection(COLLECTION_NAME);
+    await Product.insertMany(products);
+    console.log("✅ Товари успішно імпортовані!");
 
-    await collection.deleteMany({});
-    console.log("🗑 Видалено старі товари з бази");
-
-    const result = await collection.insertMany(products);
-    console.log(`✅ Імпортовано ${result.insertedCount} товарів у колекцію '${COLLECTION_NAME}'`);
-
-    await client.close();
+    mongoose.connection.close();
   } catch (error) {
-    console.error("❌ Помилка імпорту в MongoDB:", error);
+    console.error("❌ Помилка імпорту:", error);
+    mongoose.connection.close();
   }
-}
+};
 
-importProducts();
+importData();
