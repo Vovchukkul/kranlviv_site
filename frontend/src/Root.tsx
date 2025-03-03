@@ -3,12 +3,24 @@ import App from './App';
 import { ProductPage } from './components/ProductPage/ProductPage';
 import { CatalogPage } from './components/Catalog/Catalog';
 import { Header } from './components/Header/Header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Aside } from './components/Aside/Aside';
 import { Footer } from './components/Footer/Footer';
+import { Product } from './types/Product';
+import axios from 'axios';
+import { CallButton } from './components/CallButton.tsx/CallButton';
+import { CartPage } from './components/CartPage/CartPage';
 
 export const Root = () => {
   const [isActive, setIsActive] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<Product[]>("http://localhost:5000/api/products")
+      .then(response => setProducts(response.data))
+      .catch(error => console.error("Помилка отримання товарів:", error));
+  }, []);
 
   const toggleBurger = () => {
     setIsActive(!isActive);
@@ -20,12 +32,14 @@ export const Root = () => {
       {isActive && <Aside />}
   
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/product" element={<ProductPage />} />                                             
-        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/" element={<App products={products} />} />
+        <Route path="/product/:id" element={<ProductPage products={products} />} />                                             
+        <Route path="/catalog" element={<CatalogPage products={products} />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
       
-      <Footer />                                                                                        
+      <Footer />            
+      <CallButton />                                                                            
     </BrowserRouter>
   );
 };

@@ -1,29 +1,31 @@
+import { useParams } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./ProductPage.scss";
+import { Product } from "../../types/Product";
+import { useNavigate } from "react-router-dom";
 
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import './ProductPage.scss';
+interface ProductPageProps {
+  products: Product[];
+}
 
-const productImages = [
-  './images/logo.png',
-  './images/logo.png',
-  './images/logo.png'
-];
+export const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
+  const { id } = useParams<{ id: string }>();
+  const product = products.find((p) => p._id === id);
+  const navigate = useNavigate();
 
-const relatedProducts = [
-  { id: 1, name: 'Схожий товар 1', image: './images/related1.jpg', price: '1200 грн' },
-  { id: 2, name: 'Схожий товар 2', image: './images/related2.jpg', price: '1500 грн' },
-  { id: 3, name: 'Схожий товар 3', image: './images/related3.jpg', price: '1800 грн' }
-];
+  if (!product) {
+    return <h2 className="not_found">Товар не знайдено</h2>;
+  }
 
-export const ProductPage = () => {
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
+    arrows: false,
   };
 
   const relatedSettings = {
@@ -36,53 +38,69 @@ export const ProductPage = () => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        }
+        settings: { slidesToShow: 2 },
       },
       {
         breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
+        settings: { slidesToShow: 1 },
+      },
+    ],
   };
 
   return (
-    <div className='product_page'>
-      <div className='product_slider'>
+    <div className="product_page">
+      {/* 🎥 Галерея товару */}
+      <div className="product_gallery">
         <Slider {...settings}>
-          {productImages.map((image, index) => (
-            <div key={index} className='product_image'>
+          {product.images.map((image, index) => (
+            <div key={index} className="product_image">
               <img src={image} alt={`Product ${index + 1}`} />
             </div>
           ))}
         </Slider>
       </div>
-      
-      <div className='product_info'>
-        <h1 className='product_title'>Назва товару</h1>
-        <p className='product_description'>Це детальний опис товару, що включає основні характеристики та переваги.</p>
-        <ul className='product_specs'>
-          <li>Характеристика 1</li>
-          <li>Характеристика 2</li>
-          <li>Характеристика 3</li>
-        </ul>
-        <button className='buy_button'>Купити</button>
+
+      {/* ℹ️ Інформація про товар */}
+      <div className="product_details">
+        <h1 className="product_title">{product.name}</h1>
+        <p className="product_description">{product.description || "Немає опису"}</p>
+
+        {/* 📌 Характеристики */}
+        <div className="product_specs">
+          <h3>Основні характеристики</h3>
+          <ul>
+            <li><strong>Категорія:</strong> {product.category}</li>
+            <li><strong>Ціна:</strong> {product.price} грн</li>
+            <li><strong>Наявність:</strong>"Є в наявності"</li>
+          </ul>
+        </div>
+
+        <button
+          className="buy_button"
+          onClick={() => navigate("/cart", { state: { product } })}
+        >
+          Купити
+        </button>;
+
       </div>
-      
-      <section className='related_products'>
+
+      {/* 🔄 Схожі товари */}
+      <section className="related_products">
         <h2>Схожі товари</h2>
         <Slider {...relatedSettings}>
-          {relatedProducts.map(product => (
-            <div key={product.id} className='related_item'>
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.price}</p>
-              <button className='buy_button'>Купити</button>
-            </div>
-          ))}
+          {products
+            .filter((p) => p.category === product.category && p._id !== product._id)
+            .slice(0, 6)
+            .map((relatedProduct) => (
+              <div key={relatedProduct._id} className="related_item">
+                <img src={relatedProduct.images[0]} alt={relatedProduct.name} />
+                <h3>{relatedProduct.name}</h3>
+                <p>{relatedProduct.price} грн</p>
+                <a href={`/product/${relatedProduct._id}`} className="buy_button">
+                  Переглянути
+                </a>
+              </div>
+            ))}
         </Slider>
       </section>
     </div>

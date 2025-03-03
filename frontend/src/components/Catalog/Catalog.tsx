@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
-import './Catalog.scss';
+import React, { useState } from "react";
+import { Product } from "../../types/Product";
+import "./Catalog.scss";
 
-const products = [
-  { id: 1, name: 'Товар 1', category: 'Категорія A', image: './images/product1.jpg', price: '1000 грн' },
-  { id: 2, name: 'Товар 2', category: 'Категорія B', image: './images/product2.jpg', price: '1500 грн' },
-  { id: 3, name: 'Товар 3', category: 'Категорія A', image: './images/product3.jpg', price: '1200 грн' },
-  { id: 4, name: 'Товар 4', category: 'Категорія C', image: './images/product4.jpg', price: '1800 грн' },
-  { id: 5, name: 'Товар 5', category: 'Категорія D', image: './images/product5.jpg', price: '1800 грн' },
-];
+type Props = {
+  products: Product[],
+}
 
-export const CatalogPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState('');
-  const [visibleProducts, setVisibleProducts] = useState(4);
+export const CatalogPage: React.FC<Props> = ({ products }) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
+  const [visibleProducts, setVisibleProducts] = useState<number>(20);
 
-  const handleSearch = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleFilterChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryFilter(event.target.value);
   };
 
@@ -26,10 +23,12 @@ export const CatalogPage = () => {
     .filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter((product) =>
-      categoryFilter ? product.category === categoryFilter : true
-    )
+    .filter((product) => (categoryFilter ? product.category === categoryFilter : true))
     .slice(0, visibleProducts);
+  
+  
+  console.log("Images:")
+  console.log(products.map(p => p.images))
 
   return (
     <div className="catalog_page">
@@ -44,18 +43,18 @@ export const CatalogPage = () => {
         />
         <select onChange={handleFilterChange} className="filter_dropdown">
           <option value="">Всі категорії</option>
-          <option value="Категорія A">Категорія A</option>
-          <option value="Категорія B">Категорія B</option>
-          <option value="Категорія C">Категорія C</option>
+          {Array.from(new Set(products.map((product) => product.category))).map((category) => (
+            <option key={category} value={category}>{category}</option>
+          ))}
         </select>
       </div>
       <div className="product_grid">
         {filteredProducts.map((product) => (
-          <div key={product.id} className="product_card">
-            <img src={product.image} alt={product.name} />
+          <div key={product._id} className="product_card">
+            <img src={product.images[0]} alt={product.name} />
             <h3>{product.name}</h3>
-            <p>{product.price}</p>
-            <a href='/product' className="buy_button">Купити</a>
+            <p>{product.price} грн</p>
+            <a href={`/product/${product._id}`} className="buy_button">Переглянути</a>
           </div>
         ))}
       </div>
