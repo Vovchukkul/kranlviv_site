@@ -11,7 +11,7 @@ import axios from 'axios';
 import { CallButton } from './components/CallButton.tsx/CallButton';
 import { CartPage } from './components/CartPage/CartPage';
 // export const API_URL = "http://localhost:5000/api";
-export const API_URL = "https://kranlvivsite-production.up.railway.app/";
+export const API_URL = "https://kranlvivsite-production.up.railway.app/api/products";
 
 
 export const Root = () => {
@@ -19,7 +19,7 @@ export const Root = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}/products`)
+    axios.get(`${API_URL}`)
       .then(response => setProducts(response.data))
       .catch(error => console.error("Помилка отримання товарів:", error));
   }, []);
