@@ -10,7 +10,8 @@ import { Product } from './types/Product';
 import axios from 'axios';
 import { CallButton } from './components/CallButton.tsx/CallButton';
 import { CartPage } from './components/CartPage/CartPage';
-export const API_URL = "http://localhost:5000/api";
+// export const API_URL = "http://localhost:5000/api";
+export const API_URL = "https://kranlviv-backend-production.up.railway.app/api";
 
 export const Root = () => {
   const [isActive, setIsActive] = useState(false);
