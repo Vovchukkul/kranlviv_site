@@ -19,12 +19,17 @@ export const CatalogPage: React.FC<Props> = ({ products }) => {
     setCategoryFilter(event.target.value);
   };
 
+  if (products.length === 0) {
+    return <h2 className="loading">Завантаження товарів...</h2>;
+  }
+
   const filteredProducts = products
     .filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .filter((product) => (categoryFilter ? product.category === categoryFilter : true))
     .slice(0, visibleProducts);
+  
   
   
   console.log("Images:")

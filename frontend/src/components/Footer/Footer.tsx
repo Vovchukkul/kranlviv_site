@@ -10,8 +10,7 @@ export const Footer = () => {
               <a href='/'>Головна</a>
               <a href='/catalog'>Каталог</a>
               <a href='/about'>Про нас</a>
-              <a href='/contact'>Контакти</a>
-              <a href='/delivery'>Доставка і оплата</a>
+              <a href='/'>Контакти</a>
             </nav>
             <p className='footer_copyright'>&copy; {new Date().getFullYear()} Всі права захищені</p>
           </div>

@@ -8,7 +8,6 @@ export const Aside = () => {
                 <li><a href="/catalog">Каталог</a></li>
                 <li><a href="/about">Про нас</a></li>
                 <li><a href="/contact">Контакти</a></li>
-                <li><a href="/delivery">Доставка і оплата</a></li>
             </ul>
             <a href="tel:0980490904" className="block mt-6 text-gray-400 hover:text-white">Зателефонувати</a>
         </aside>

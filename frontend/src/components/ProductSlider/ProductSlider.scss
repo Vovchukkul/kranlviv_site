@@ -33,13 +33,14 @@
 }
 
 .product-card {
-  min-width: 250px;
-  max-width: 100%;
+  min-width: 200px;
+  max-width: 400px;
   height: 500px; // ❗ Фіксована висота для однакових карток
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  padding: 16px;
+  padding-top: 16px;
+  padding-left: -16px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -51,6 +52,7 @@
   max-height: 250px;
   object-fit: cover;
   border-radius: 8px;
+  height: 250px;
 }
 
 .product-card h3 {

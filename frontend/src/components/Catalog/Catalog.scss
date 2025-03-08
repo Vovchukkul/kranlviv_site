@@ -46,6 +46,7 @@
   max-height: 250px; /* ❗ Однаковий розмір фото */
   object-fit: cover;
   border-radius: 8px;
+  height: 250px;
 }
 
 .product_card h3 {
@@ -95,14 +96,14 @@
 /* 📌 Адаптивний grid для різних екранів */
 @media (max-width: 1280px) {
   .product_grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+    grid-template-columns: repeat(4, 1fr); /* 3 колонки */
     gap: 25px;
   }
 }
 
 @media (max-width: 1024px) {
   .product_grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+    grid-template-columns: repeat(3, 1fr); /* 2 колонки */
     gap: 20px;
   }
 }
@@ -114,6 +115,18 @@
   }
 
   .product_grid {
+    grid-template-columns: repeat(2, 1fr); /* 1 колонка */
+  }
+}
+
+@media (max-width: 500px) {
+  .catalog_controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .product_grid {
     grid-template-columns: repeat(1, 1fr); /* 1 колонка */
   }
 }
+

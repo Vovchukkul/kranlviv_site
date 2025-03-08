@@ -12,8 +12,14 @@ interface ProductPageProps {
 
 export const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
   const { id } = useParams<{ id: string }>();
-  const product = products.find((p) => p._id === id);
   const navigate = useNavigate();
+
+  // 🕐 Очікуємо, поки товари завантажаться
+  if (products.length === 0) {
+    return <h2 className="loading">Завантаження товару...</h2>;
+  }
+
+  const product = products.find((p) => p._id === id);
 
   if (!product) {
     return <h2 className="not_found">Товар не знайдено</h2>;
@@ -32,16 +38,20 @@ export const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
     responsive: [
       {
         breakpoint: 1024,
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 3 },
       },
       {
         breakpoint: 768,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 480,
         settings: { slidesToShow: 1 },
       },
     ],
@@ -71,7 +81,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
           <ul>
             <li><strong>Категорія:</strong> {product.category}</li>
             <li><strong>Ціна:</strong> {product.price} грн</li>
-            <li><strong>Наявність:</strong>"Є в наявності"</li>
+            <li><strong>Наявність:</strong> "Є в наявності"</li>
           </ul>
         </div>
 
@@ -80,8 +90,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
           onClick={() => navigate("/cart", { state: { product } })}
         >
           Купити
-        </button>;
-
+        </button>
       </div>
 
       {/* 🔄 Схожі товари */}

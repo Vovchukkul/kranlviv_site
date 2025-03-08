@@ -23,7 +23,6 @@ export const App: React.FC<Props> = ({ products }) => {
         <Hero />
         
         <section className="product-slider-section">
-          <h2 className="section-title">Популярні товари</h2>
           <ProductSlider products={products} />
         </section>
 
