@@ -55,11 +55,11 @@ export const CatalogPage: React.FC<Props> = ({ products }) => {
       </div>
       <div className="product_grid">
         {filteredProducts.map((product) => (
-          <div key={product._id} className="product_card">
+          <div key={product.id} className="product_card">
             <img src={product.images[0]} alt={product.name} />
             <h3>{product.name}</h3>
             <p>{product.price} грн</p>
-            <a href={`/product/${product._id}`} className="buy_button">Переглянути</a>
+            <a href={`/product/${product.id}`} className="buy_button">Переглянути</a>
           </div>
         ))}
       </div>

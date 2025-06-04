@@ -19,7 +19,8 @@ export const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
     return <h2 className="loading">Завантаження товару...</h2>;
   }
 
-  const product = products.find((p) => p._id === id);
+  const product = products.find((p) => p.id.toString() === id);
+  console.log(id)
 
   if (!product) {
     return <h2 className="not_found">Товар не знайдено</h2>;
@@ -98,14 +99,14 @@ export const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
         <h2>Схожі товари</h2>
         <Slider {...relatedSettings}>
           {products
-            .filter((p) => p.category === product.category && p._id !== product._id)
+            .filter((p) => p.category === product.category && p.id !== product.id)
             .slice(0, 6)
             .map((relatedProduct) => (
-              <div key={relatedProduct._id} className="related_item">
+              <div key={relatedProduct.id} className="related_item">
                 <img src={relatedProduct.images[0]} alt={relatedProduct.name} />
                 <h3>{relatedProduct.name}</h3>
                 <p>{relatedProduct.price} грн</p>
-                <a href={`/product/${relatedProduct._id}`} className="buy_button">
+                <a href={`/product/${relatedProduct.id}`} className="buy_button">
                   Переглянути
                 </a>
               </div>

@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react';
 import { Aside } from './components/Aside/Aside';
 import { Footer } from './components/Footer/Footer';
 import { Product } from './types/Product';
-import axios from 'axios';
+// import axios from 'axios';
 import { CallButton } from './components/CallButton.tsx/CallButton';
 import { CartPage } from './components/CartPage/CartPage';
 // export const API_URL = "http://localhost:5000/api";
+import productsFromServer from '../public/prom_products.json'
 export const API_URL = "https://kranlvivsite-production.up.railway.app/api/products";
 
 
@@ -19,10 +20,20 @@ export const Root = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}`)
-      .then(response => setProducts(response.data))
-      .catch(error => console.error("Помилка отримання товарів:", error));
-  }, []);
+    const products = productsFromServer.map((product) => {
+      return {
+        ...product,
+        id: product.id.toString()
+      }
+    })
+    setProducts(products)
+  }, [])
+
+  // useEffect(() => {
+  //   axios.get(`${API_URL}`)
+  //     .then(response => setProducts(response.data))
+  //     .catch(error => console.error("Помилка отримання товарів:", error));
+  // }, []);
 
   const toggleBurger = () => {
     setIsActive(!isActive);
