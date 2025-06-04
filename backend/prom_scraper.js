@@ -31,6 +31,8 @@ async function fetchAllProducts() {
         }
       });
 
+      console.log(response.data)
+
       if (response.data.products && response.data.products.length > 0) {
         const products = response.data.products.map(product => ({
           id: product.id,
